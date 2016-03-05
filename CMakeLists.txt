@@ -6,8 +6,6 @@ set(PLATFORMIO_CMD "/usr/local/bin/platformio")
 
 include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoavr/variants/standard")
 include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoavr/cores/arduino")
-include_directories("$ENV{HOME}/arduino/lib/IRremote/src")
-include_directories("$ENV{HOME}/arduino/lib/LiquidCrystal/src")
 include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoavr/libraries/Audio/src")
 include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoavr/libraries/Bridge/src")
 include_directories("$ENV{HOME}/.platformio/packages/framework-arduinoavr/libraries/EEPROM")
