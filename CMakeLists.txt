@@ -83,5 +83,5 @@ add_custom_target(
 )
 
 add_executable(arduino
-    src/main.cpp
+    src/Main.cpp
 )
