@@ -1,41 +1,26 @@
 #include <Arduino.h>
-#include <IRremote.h>
-#include "IRCodes.h"
+#include "RemoteControl.h"
+#include "PowerController.h"
+#include "MotorController.h"
+#include "MotionController.h"
 
-#define LED_PIN 12
-
-IRrecv iRrecv(11);
-
-decode_results results;
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+RemoteControl rc(11);
+PowerController power;
+MotionController motion(new MotorController(12, 7), new MotorController(13, 8));
 
 void setup() {
-    pinMode(LED_PIN, OUTPUT);
     Serial.begin(9600);
-    Serial.println("start");
-    iRrecv.enableIRIn();
 }
 
 void loop() {
-    if (iRrecv.decode(&results)) {
-        if (results.value == POWER) {
-            digitalWrite(LED_PIN, HIGH);
-            delay(50);
-            digitalWrite(LED_PIN, LOW);
-            delay(50);
-            digitalWrite(LED_PIN, HIGH);
-            delay(50);
-            digitalWrite(LED_PIN, LOW);
-            delay(50);
-            digitalWrite(LED_PIN, HIGH);
-            delay(50);
-            digitalWrite(LED_PIN, LOW);
-            delay(50);
-        } else {
-            digitalWrite(LED_PIN, HIGH);
-            delay(100);
-            digitalWrite(LED_PIN, LOW);
-        }
-        Serial.println(results.value, HEX);
-        iRrecv.resume();
+    unsigned long code = rc.getIRCode();
+    Serial.println(code, HEX);
+    power.switchModeIfNeeded(code);
+    if (power.isOn()) {
+        motion.switchModeIfNeeded(code);
     }
+
 }
+#pragma clang diagnostic pop
