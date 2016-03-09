@@ -22,4 +22,4 @@
      - pip install -U platformio
 
  script:
-     - platformio run
+     -  platformio lib install 4 && platformio run
