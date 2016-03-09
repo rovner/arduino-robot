@@ -1,16 +1,14 @@
-//
-// Created by Vyacheslav Rovnyakov on 05/03/16.
-//
+#ifndef ARDUINO_REMOTECONTROL_H
+#define ARDUINO_REMOTECONTROL_H
 
-#ifndef ARDUINO_IRCODES_H
-#define ARDUINO_IRCODES_H
+#include <IRremote.h>
 
 #define POWER 0xFFA25D
 #define MENU 0xFFE21D
 #define TEST 0xFF22DD
 #define PLUS 0xFF02FD
 #define BACK 0xFFC23D
-#define PREVIOUS 0xFFE01F
+#define PREV 0xFFE01F
 #define PLAY 0xFFA857
 #define NEXT 0xFF906F
 #define MINUS 0xFF9867
@@ -26,4 +24,16 @@
 #define _8 0xFF4AB5
 #define _9 0xFF52AD
 
-#endif //ARDUINO_IRCODES_H
+class RemoteControl {
+public:
+    RemoteControl(int irPin);
+
+    unsigned long getIRCode();
+
+private:
+    IRrecv *irRecv;
+    decode_results results;
+    bool initialized = false;
+};
+
+#endif //ARDUINO_REMOTECONTROL_H
