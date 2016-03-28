@@ -15,12 +15,21 @@ public:
 
     void stop();
 
+    void increaseSpeed();
+
+    void decreaseSpeed();
+
 private:
     int forwardPin;
     int backwardPin;
     int controlPin;
+    int speed;
 
     void initIfNeeded();
+
+    void setSpeed(int speed);
+
+    int getSpeed();
 
     bool initialized = false;
 };

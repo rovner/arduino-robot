@@ -8,7 +8,7 @@
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 RemoteControl rc(11);
 PowerController power;
-MotorController left(MotorController(8, 9, 10 ));
+MotorController left(MotorController(8, 9, 10));
 MotorController right(MotorController(4, 5, 6));
 MotionController motion(&left, &right);
 
@@ -18,7 +18,6 @@ void setup() {
 
 void loop() {
     unsigned long code = rc.getIRCode();
-    Serial.println(code, HEX);
     power.switchModeIfNeeded(code);
     if (power.isOn()) {
         motion.switchModeIfNeeded(code);

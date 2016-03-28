@@ -5,6 +5,7 @@ MotorController::MotorController(int forwardPin, int backwardPin, int controlPin
     MotorController::forwardPin = forwardPin;
     MotorController::backwardPin = backwardPin;
     MotorController::controlPin = controlPin;
+    MotorController::speed = 10;
 }
 
 void MotorController::moveForward() {
@@ -13,7 +14,7 @@ void MotorController::moveForward() {
     analogWrite(controlPin, 0);
     digitalWrite(forwardPin, LOW);
     digitalWrite(backwardPin, HIGH);
-    analogWrite(controlPin, 200);
+    analogWrite(controlPin, getSpeed());
 }
 
 void MotorController::moveBackward() {
@@ -21,7 +22,7 @@ void MotorController::moveBackward() {
     analogWrite(controlPin, 0);
     digitalWrite(forwardPin, HIGH);
     digitalWrite(backwardPin, LOW);
-    analogWrite(controlPin, 200);
+    analogWrite(controlPin, getSpeed());
 }
 
 void MotorController::stop() {
@@ -38,4 +39,22 @@ void MotorController::initIfNeeded() {
         pinMode(controlPin, OUTPUT);
         initialized = true;
     }
+}
+
+void MotorController::increaseSpeed() {
+    setSpeed(speed + 1);
+}
+
+void MotorController::decreaseSpeed() {
+    setSpeed(speed - 1);
+}
+
+void MotorController::setSpeed(int speed) {
+    if (speed > 0 && speed <= 10) {
+        MotorController::speed = speed;
+    }
+}
+
+int MotorController::getSpeed() {
+    return 50 + speed * 20;
 }

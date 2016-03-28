@@ -20,6 +20,10 @@ private:
 
     void stop();
 
+    void increaseSpeed();
+
+    void decreaseSpeed();
+
     MotorController *leftMotor;
     MotorController *rightMotor;
 };

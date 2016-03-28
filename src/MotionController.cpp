@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "MotionController.h"
 #include "MotorController.h"
 #include "RemoteControl.h"
@@ -20,6 +21,14 @@ void MotionController::switchModeIfNeeded(unsigned long code) {
             break;
         case NEXT:
             moveRight();
+            break;
+        case MENU:
+            increaseSpeed();
+            delay(50);
+            break;
+        case BACK:
+            decreaseSpeed();
+            delay(50);
             break;
         case REPEAT:
             //do nothing
@@ -52,4 +61,14 @@ void MotionController::moveRight() {
 void MotionController::stop() {
     leftMotor->stop();
     rightMotor->stop();
+}
+
+void MotionController::increaseSpeed() {
+    leftMotor->increaseSpeed();
+    rightMotor->increaseSpeed();
+}
+
+void MotionController::decreaseSpeed() {
+    leftMotor->decreaseSpeed();
+    rightMotor->decreaseSpeed();
 }
