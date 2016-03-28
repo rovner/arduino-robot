@@ -7,7 +7,7 @@
 
 class MotorController {
 public:
-    MotorController(int forwardLedPin, int backwardLedPin);
+    MotorController(int forwardPin, int backwardPin, int controlPin);
 
     void moveForward();
 
@@ -16,8 +16,9 @@ public:
     void stop();
 
 private:
-    int forwardLedPin;
-    int backwardLedPin;
+    int forwardPin;
+    int backwardPin;
+    int controlPin;
 
     void initIfNeeded();
 

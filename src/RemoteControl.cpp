@@ -11,12 +11,21 @@ unsigned long RemoteControl::getIRCode() {
         irRecv->enableIRIn();
         initialized = true;
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         if (irRecv->decode(&results)) {
-            irRecv->resume();
-            return results.value;
+            if (results.value != REPEAT) {
+                last = results.value;
+            }
+            return last;
         }
-        delay(20);
+        delay(10);
     }
     return 0;
+}
+
+void RemoteControl::resume(unsigned long code) {
+    if (code != 0) {
+        Serial.println("Resumed");
+        irRecv->resume();
+    }
 }

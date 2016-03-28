@@ -1,33 +1,41 @@
 #include "MotorController.h"
 #include <Arduino.h>
 
-MotorController::MotorController(int forwardLedPin, int backwardLedPin) {
-    MotorController::forwardLedPin = forwardLedPin;
-    MotorController::backwardLedPin = backwardLedPin;
+MotorController::MotorController(int forwardPin, int backwardPin, int controlPin) {
+    MotorController::forwardPin = forwardPin;
+    MotorController::backwardPin = backwardPin;
+    MotorController::controlPin = controlPin;
 }
 
 void MotorController::moveForward() {
     initIfNeeded();
-    digitalWrite(forwardLedPin, HIGH);
-    digitalWrite(backwardLedPin, LOW);
+    stop();
+    analogWrite(controlPin, 0);
+    digitalWrite(forwardPin, LOW);
+    digitalWrite(backwardPin, HIGH);
+    analogWrite(controlPin, 200);
 }
 
 void MotorController::moveBackward() {
     initIfNeeded();
-    digitalWrite(backwardLedPin, HIGH);
-    digitalWrite(forwardLedPin, LOW);
+    analogWrite(controlPin, 0);
+    digitalWrite(forwardPin, HIGH);
+    digitalWrite(backwardPin, LOW);
+    analogWrite(controlPin, 200);
 }
 
 void MotorController::stop() {
     initIfNeeded();
-    digitalWrite(forwardLedPin, LOW);
-    digitalWrite(backwardLedPin, LOW);
+    analogWrite(controlPin, 0);
+    digitalWrite(forwardPin, LOW);
+    digitalWrite(backwardPin, LOW);
 }
 
 void MotorController::initIfNeeded() {
     if (!initialized) {
-        pinMode(forwardLedPin, OUTPUT);
-        pinMode(backwardLedPin, OUTPUT);
+        pinMode(forwardPin, OUTPUT);
+        pinMode(backwardPin, OUTPUT);
+        pinMode(controlPin, OUTPUT);
         initialized = true;
     }
 }
