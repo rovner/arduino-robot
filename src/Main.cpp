@@ -8,8 +8,8 @@
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 RemoteControl rc(11);
 PowerController power;
-MotorController left(MotorController(8, 9, 10));
-MotorController right(MotorController(4, 5, 6));
+MotorController left(MotorController(A4, 4, 6));
+MotorController right(MotorController(A5, 3, 5));
 MotionController motion(&left, &right);
 
 void setup() {
