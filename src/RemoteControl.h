@@ -30,11 +30,11 @@ public:
 
     unsigned long getIRCode();
     void resume(unsigned long code);
+    void init();
 
 private:
     IRrecv *irRecv;
     decode_results results;
-    bool initialized = false;
     unsigned long last;
 };
 

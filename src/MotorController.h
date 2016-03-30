@@ -5,9 +5,11 @@
 #ifndef ARDUINO_MOTORCONTROLLER_H
 #define ARDUINO_MOTORCONTROLLER_H
 
+#include <Arduino.h>
+
 class MotorController {
 public:
-    MotorController(int forwardPin, int backwardPin, int controlPin);
+    MotorController(uint8_t forwardPin, uint8_t backwardPin, uint8_t controlPin);
 
     void moveForward();
 
@@ -19,19 +21,17 @@ public:
 
     void decreaseSpeed();
 
+    void init();
+
 private:
-    int forwardPin;
-    int backwardPin;
-    int controlPin;
-    int speed;
+    uint8_t forwardPin;
+    uint8_t backwardPin;
+    uint8_t controlPin;
+    uint8_t speed;
 
-    void initIfNeeded();
-
-    void setSpeed(int speed);
+    void setSpeed(uint8_t speed);
 
     int getSpeed();
-
-    bool initialized = false;
 };
 
 #endif //ARDUINO_MOTORCONTROLLER_H

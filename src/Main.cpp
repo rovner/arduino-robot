@@ -14,6 +14,8 @@ MotionController motion(&left, &right);
 
 void setup() {
     Serial.begin(9600);
+    motion.init();
+    rc.init();
 }
 
 void loop() {

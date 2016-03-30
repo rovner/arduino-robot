@@ -9,6 +9,8 @@ public:
 
     void switchModeIfNeeded(unsigned long code);
 
+    void init();
+
 private:
     void moveForward();
 

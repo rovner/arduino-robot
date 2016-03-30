@@ -1,7 +1,7 @@
 #include "MotorController.h"
 #include <Arduino.h>
 
-MotorController::MotorController(int forwardPin, int backwardPin, int controlPin) {
+MotorController::MotorController(uint8_t forwardPin, uint8_t backwardPin, uint8_t controlPin) {
     MotorController::forwardPin = forwardPin;
     MotorController::backwardPin = backwardPin;
     MotorController::controlPin = controlPin;
@@ -9,8 +9,6 @@ MotorController::MotorController(int forwardPin, int backwardPin, int controlPin
 }
 
 void MotorController::moveForward() {
-    initIfNeeded();
-    stop();
     analogWrite(controlPin, 0);
     digitalWrite(forwardPin, LOW);
     digitalWrite(backwardPin, HIGH);
@@ -18,7 +16,6 @@ void MotorController::moveForward() {
 }
 
 void MotorController::moveBackward() {
-    initIfNeeded();
     analogWrite(controlPin, 0);
     digitalWrite(forwardPin, HIGH);
     digitalWrite(backwardPin, LOW);
@@ -26,19 +23,15 @@ void MotorController::moveBackward() {
 }
 
 void MotorController::stop() {
-    initIfNeeded();
     analogWrite(controlPin, 0);
     digitalWrite(forwardPin, LOW);
     digitalWrite(backwardPin, LOW);
 }
 
-void MotorController::initIfNeeded() {
-    if (!initialized) {
-        pinMode(forwardPin, OUTPUT);
-        pinMode(backwardPin, OUTPUT);
-        pinMode(controlPin, OUTPUT);
-        initialized = true;
-    }
+void MotorController::init() {
+    pinMode(forwardPin, OUTPUT);
+    pinMode(backwardPin, OUTPUT);
+    pinMode(controlPin, OUTPUT);
 }
 
 void MotorController::increaseSpeed() {
@@ -49,7 +42,7 @@ void MotorController::decreaseSpeed() {
     setSpeed(speed - 1);
 }
 
-void MotorController::setSpeed(int speed) {
+void MotorController::setSpeed(uint8_t speed) {
     if (speed > 0 && speed <= 10) {
         MotorController::speed = speed;
     }

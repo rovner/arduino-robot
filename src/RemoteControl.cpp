@@ -7,10 +7,6 @@ RemoteControl::RemoteControl(int irPin) {
 };
 
 unsigned long RemoteControl::getIRCode() {
-    if (!initialized) {
-        irRecv->enableIRIn();
-        initialized = true;
-    }
     for (int i = 0; i < 20; i++) {
         if (irRecv->decode(&results)) {
             if (results.value != REPEAT) {
@@ -23,9 +19,12 @@ unsigned long RemoteControl::getIRCode() {
     return 0;
 }
 
+void RemoteControl::init() {
+    irRecv->enableIRIn();
+}
+
 void RemoteControl::resume(unsigned long code) {
     if (code != 0) {
-        Serial.println("Resumed");
         irRecv->resume();
     }
 }

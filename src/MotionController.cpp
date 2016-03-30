@@ -72,3 +72,8 @@ void MotionController::decreaseSpeed() {
     leftMotor->decreaseSpeed();
     rightMotor->decreaseSpeed();
 }
+
+void MotionController::init() {
+    leftMotor->init();
+    rightMotor->init();
+}
