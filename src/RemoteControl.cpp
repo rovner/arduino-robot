@@ -2,7 +2,7 @@
 #include <IRremote.h>
 #include <Arduino.h>
 
-RemoteControl::RemoteControl(int irPin) {
+RemoteControl::RemoteControl(uint8_t irPin) {
     irRecv = new IRrecv(irPin);
 };
 
